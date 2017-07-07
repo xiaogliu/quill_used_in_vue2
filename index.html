@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>quill used in vue2</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{ message | capitalize }}
+		{{reverseMessage}}
+	</div>
+	<script>
+		var app = new Vue ({ // 通过构造函数创建vue实例
+			el: '#app',
+			data: {
+				message: 'hello world!'
+			},
+			beforeCreate : function () {
+				console.log(this.message);
+			},
+			created: function () {
+				console.log(this.message);
+			},
+			mounted: function () {
+				console.log(this.message);
+			},
+			filters: {
+				capitalize: function (value) {
+					if (!value) return ''
+						value = value.toString()
+					return value.charAt(0).toUpperCase() + value.slice(1)
+				}
+			},
+			computed: {
+				reverseMessage: function () {
+					return this.message.split(' ').reverse().join(' ');
+				}
+			}
+		});
+		console.log(app.$data); // 通过在属性和方法前面加$符号可以访问vue实例的属性和方法（有内置属性，比如$watch）
+	</script>
+</body>
+</html>
